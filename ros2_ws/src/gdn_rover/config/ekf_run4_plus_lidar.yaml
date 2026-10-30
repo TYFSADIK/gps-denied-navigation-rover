@@ -1,0 +1,20 @@
+# Run 4: Run 3 + rf2o LiDAR scan-matching odometry (the external witness).
+ekf_filter_node:
+  ros__parameters:
+    frequency: 50.0
+    two_d_mode: true
+    publish_tf: true
+    world_frame: odom
+    odom_frame: odom
+    base_link_frame: base_link
+    odom0: /wheel/odom
+    odom0_config: [false, false, false, false, false, false, true, true, false, false, false, true, false, false, false]
+    odom0_rejection_threshold: 5.0
+    imu0: /imu/data
+    imu0_config:  [false, false, false, false, false, true, false, false, false, false, false, true, false, false, false]
+    imu0_relative: true
+    odom1: /odom_rf2o
+    odom1_config: [false, false, false, false, false, false, true, true, false, false, false, true, false, false, false]
+    odom1_differential: false
+    odom1_rejection_threshold: 6.0       # scan-match failures in featureless snow get gated
+# GNSS (u-blox) is RECORDED in the bag for truth but subscribed to by nothing.

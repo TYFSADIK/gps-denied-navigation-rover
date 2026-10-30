@@ -1,0 +1,2 @@
+numpy>=1.26
+rosbags>=0.10   # only for gdn_eval.export

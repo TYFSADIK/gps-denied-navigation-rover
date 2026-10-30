@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>gdn_rover</name>
+  <version>0.1.0</version>
+  <description>GPS-denied navigation rover: skid-steer odometry, EKF configs, launch</description>
+  <maintainer email="tyfsadik05@gmail.com">Taki Sadik</maintainer>
+  <license>Proprietary</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>nav_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>eigen</depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>rf2o_laser_odometry</exec_depend>
+  <exec_depend>ldlidar_stl_ros2</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.16)
+project(gdn_rover CXX)
+set(CMAKE_CXX_STANDARD 17)
+option(GDN_HOST_TESTS_ONLY "Build only the ROS-free unit tests" OFF)
+
+find_package(Eigen3 REQUIRED NO_MODULE)
+include_directories(include)
+
+if(GDN_HOST_TESTS_ONLY)
+  enable_testing()
+  add_executable(test_core test/test_core.cpp)
+  target_link_libraries(test_core Eigen3::Eigen)
+  add_test(NAME core COMMAND test_core)
+  return()
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+
+add_executable(wheel_odom_node src/wheel_odom_node.cpp)
+ament_target_dependencies(wheel_odom_node rclcpp nav_msgs std_msgs)
+install(TARGETS wheel_odom_node DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY config launch DESTINATION share/${PROJECT_NAME})
+
+if(BUILD_TESTING)
+  add_executable(test_core test/test_core.cpp)
+  target_link_libraries(test_core Eigen3::Eigen)
+  add_test(NAME test_core COMMAND test_core)
+endif()
+ament_package()
